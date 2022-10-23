@@ -30,6 +30,7 @@ buttonsContainer.addEventListener('click', (e) => {
             reset()
             break
         case MULTIPLY:
+            operate(multiply, lowerDisplay.innerHTML, MULTIPLY)
             break
         case DIVIDE:
             break
@@ -55,6 +56,11 @@ function add(a, b) {
     return Number(a) + Number(b)
 }
 
+function multiply(a, b) {
+    console.log(`multiplying ${a} and ${b}`)
+    return Number(a) * Number(b)
+}
+
 function equals(value) {
     upperDisplay.innerHTML = ''
     if (prevOper)
@@ -70,10 +76,18 @@ function operate(operator, value, char) {
     activeDisplay.innerHTML = ''
 
     if (prevVal) {
-        console.log(`prevVal: ${prevVal}`)
-        let result = operator(value, prevVal)
-        lowerDisplay.innerHTML = result
-        prevVal = result
+        if (operator == prevOper) {
+            console.log(`prevVal: ${prevVal}`)
+            let result = operator(value, prevVal)
+            lowerDisplay.innerHTML = result
+            prevVal = result
+        } else {
+            console.log(`prevVal: ${prevVal}`)
+            let result = prevOper(value, prevVal)
+            upperDisplay.innerHTML = result + ` ${char} `
+
+            prevVal = result
+        }
     } else {
         prevVal = value
     }
@@ -91,4 +105,5 @@ function reset() {
     lowerDisplay.innerHTML = '0'
     upperDisplay.innerHTML = ''
     prevVal = null
+    prevOper = null
 }
