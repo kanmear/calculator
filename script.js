@@ -47,6 +47,7 @@ buttonsContainer.addEventListener('click', (e) => {
             equals(lowerDisplay.innerHTML)
             break
         case 'x<sup>y</sup>':
+            operate(toPowerOf, lowerDisplay.innerHTML, '^')
             break
         default:
             addNumber(element.innerHTML)
@@ -71,6 +72,14 @@ function multiply(a, b) {
 function divide(a, b) {
     console.log(`dividing ${a} by ${b}`)
     return +(Math.round((Number(a) / Number(b)) + 'e+2') + 'e-2')
+}
+
+function toPowerOf(a, b) {
+    console.log(`raising ${a} to power of ${b}`)
+    let result = a
+    for (; b > 1; b--)
+      result *= a
+    return result 
 }
 
 function equals(value) {
