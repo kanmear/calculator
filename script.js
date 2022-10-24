@@ -36,6 +36,7 @@ buttonsContainer.addEventListener('click', (e) => {
             operate(divide, lowerDisplay.innerHTML, DIVIDE)
             break
         case SUBTRACT:
+            operate(subtract, lowerDisplay.innerHTML, SUBTRACT)
             break
         case ADD:
             operate(add, lowerDisplay.innerHTML, ADD)
@@ -55,6 +56,11 @@ buttonsContainer.addEventListener('click', (e) => {
 function add(a, b) {
     console.log(`adding ${a} and ${b}`)
     return Number(a) + Number(b)
+}
+
+function subtract(a, b) {
+    console.log(`subtracting ${b} from ${a}`)
+    return Number(a) - Number(b)
 }
 
 function multiply(a, b) {
