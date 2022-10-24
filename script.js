@@ -33,6 +33,7 @@ buttonsContainer.addEventListener('click', (e) => {
             operate(multiply, lowerDisplay.innerHTML, MULTIPLY)
             break
         case DIVIDE:
+            operate(divide, lowerDisplay.innerHTML, DIVIDE)
             break
         case SUBTRACT:
             break
@@ -59,6 +60,11 @@ function add(a, b) {
 function multiply(a, b) {
     console.log(`multiplying ${a} and ${b}`)
     return Number(a) * Number(b)
+}
+
+function divide(a, b) {
+    console.log(`dividing ${a} by ${b}`)
+    return +(Math.round((Number(a) / Number(b)) + 'e+2') + 'e-2')
 }
 
 function equals(value) {
