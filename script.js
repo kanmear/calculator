@@ -92,6 +92,7 @@ function equals(value) {
     prevOper = null
 }
 
+//FIXME: consequent chaining bug (where operands order matters)
 function operate(operator, value, char) {
     upperDisplay.innerHTML += lowerDisplay.innerHTML + ` ${char} `
     activeDisplay.innerHTML = ''
@@ -104,7 +105,7 @@ function operate(operator, value, char) {
             prevVal = result
         } else {
             console.log(`prevVal: ${prevVal}`)
-            let result = prevOper(value, prevVal)
+            let result = prevOper(prevVal, value)
             upperDisplay.innerHTML = result + ` ${char} `
 
             prevVal = result
