@@ -5,6 +5,7 @@ const DIVIDE = '÷'
 const ADD = '+'
 const SUBTRACT = '-'
 const EQUALS = '='
+const POINT = '.'
 
 const upperDisplay = document.querySelector('.upper-part')
 const lowerDisplay = document.querySelector('.lower-part')
@@ -12,9 +13,6 @@ const lowerDisplay = document.querySelector('.lower-part')
 const buttonsContainer = document.querySelector('.buttons')
 
 let activeDisplay = lowerDisplay
-let currentOperation = null
-let prevVal = null
-let prevOper = null
 
 buttonsContainer.addEventListener('click', (e) => {
     if (e.target.tagName != 'BUTTON')
@@ -42,6 +40,7 @@ buttonsContainer.addEventListener('click', (e) => {
             operate(add, lowerDisplay.innerHTML, ADD)
             break
         case '.':
+            // operate(point, lowerDisplay.innerHTML, POINT)
             break
         case EQUALS:
             equals(lowerDisplay.innerHTML)
@@ -82,6 +81,10 @@ function toPowerOf(a, b) {
     return result 
 }
 
+function point(a) {
+    return a + '.'
+}
+
 function equals(value) {
     upperDisplay.innerHTML = ''
     if (prevOper)
@@ -92,7 +95,12 @@ function equals(value) {
     prevOper = null
 }
 
-//FIXME: consequent chaining bug (where operands order matters)
+//FIXME: interrupting operation causes all sorts of bugs
+//TODO: refactor operate to support normal calculator cases and a point delimeter
+let currentOperation = null
+let prevVal = null
+let prevOper = null
+
 function operate(operator, value, char) {
     upperDisplay.innerHTML += lowerDisplay.innerHTML + ` ${char} `
     activeDisplay.innerHTML = ''
