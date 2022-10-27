@@ -87,21 +87,55 @@ function point(a) {
 
 function equals(value) {
     upperDisplay.innerHTML = ''
-    if (prevOper)
-        lowerDisplay.innerHTML = prevOper(prevVal, value)
+    if (currentOperation)
+        lowerDisplay.innerHTML = currentOperation(currentValue, value)
     else
-        lowerDisplay.innerHTML = prevVal 
-    prevVal = null
-    prevOper = null
+        lowerDisplay.innerHTML = currentValue 
+    currentValue = null
+    currentOperation = null
 }
 
 //FIXME: interrupting operation causes all sorts of bugs
 //TODO: refactor operate to support normal calculator cases and a point delimeter
+// let currentOperation = null
+// let prevVal = null
+// let prevOper = null
 let currentOperation = null
-let prevVal = null
-let prevOper = null
+let currentValue = null
 
 function operate(operator, value, char) {
+    let isUpperDisplayEmpty = upperDisplay.innerHTML == '' || upperDisplay.innerHTML == null
+    let isLowerDisplayEmptyOrZero = value == '' || value == '0' || value == null
+    if (isUpperDisplayEmpty && isLowerDisplayEmptyOrZero) {
+        console.log('nothing to work with')
+        return
+    }
+    if (isUpperDisplayEmpty && !isLowerDisplayEmptyOrZero) {
+        console.log('only upper is empty')
+        upperDisplay.innerHTML = `${value} ${char} `
+        lowerDisplay.innerHTML = ''
+        currentOperation = operator
+        currentValue = value
+    } else if (!isUpperDisplayEmpty && isLowerDisplayEmptyOrZero) {
+        console.log('only lower is empty')
+        upperDisplay.innerHTML = `${currentValue} ${char} `
+        lowerDisplay.innerHTML = ''
+        currentOperation = operator
+    } else if (!isUpperDisplayEmpty && !isLowerDisplayEmptyOrZero) {
+        console.log('both are filled')
+        if (operator != currentOperation) {
+            let previousOperationResult = currentOperation(currentValue, value)
+            upperDisplay.innerHTML = `${previousOperationResult} ${char} `
+            lowerDisplay.innerHTML = ''
+            currentOperation = operator
+            currentValue = previousOperationResult
+        } else {
+            return
+        }
+    }
+}
+
+function op(operator, value, char) {
     upperDisplay.innerHTML += lowerDisplay.innerHTML + ` ${char} `
     activeDisplay.innerHTML = ''
 
@@ -134,6 +168,6 @@ function addNumber(n) {
 function reset() {
     lowerDisplay.innerHTML = '0'
     upperDisplay.innerHTML = ''
-    prevVal = null
-    prevOper = null
+    currentValue = null
+    currentOperation = null
 }
