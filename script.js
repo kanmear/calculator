@@ -81,6 +81,7 @@ function toPowerOf(a, b) {
     return result 
 }
 
+//TODO : add point functionality
 function point(a) {
     return a + '.'
 }
@@ -95,14 +96,10 @@ function equals(value) {
     currentOperation = null
 }
 
-//FIXME: interrupting operation causes all sorts of bugs
-//TODO: refactor operate to support normal calculator cases and a point delimeter
-// let currentOperation = null
-// let prevVal = null
-// let prevOper = null
 let currentOperation = null
 let currentValue = null
 
+//TODO : test this
 function operate(operator, value, char) {
     let isUpperDisplayEmpty = upperDisplay.innerHTML == '' || upperDisplay.innerHTML == null
     let isLowerDisplayEmptyOrZero = value == '' || value == '0' || value == null
