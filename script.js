@@ -58,17 +58,17 @@ buttonsContainer.addEventListener('click', (e) => {
 
 function add(a, b) {
     console.log(`adding ${a} and ${b}`)
-    return Number(a) + Number(b)
+    return +(Math.round((Number(a) + Number(b)) + 'e+2') + 'e-2')
 }
 
 function subtract(a, b) {
     console.log(`subtracting ${b} from ${a}`)
-    return Number(a) - Number(b)
+    return +(Math.round((Number(a) - Number(b)) + 'e+2') + 'e-2')
 }
 
 function multiply(a, b) {
     console.log(`multiplying ${a} and ${b}`)
-    return Number(a) * Number(b)
+    return +(Math.round((Number(a) * Number(b)) + 'e+2') + 'e-2')
 }
 
 function divide(a, b) {
@@ -81,7 +81,7 @@ function toPowerOf(a, b) {
     let result = a
     for (; b > 1; b--)
       result *= a
-    return result 
+    return +(Math.round(result + 'e+2') + 'e-2')
 }
 
 function point(a) {
