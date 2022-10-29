@@ -14,6 +14,9 @@ const buttonsContainer = document.querySelector('.buttons')
 
 let activeDisplay = lowerDisplay
 
+let currentOperation = null
+let currentValue = null
+
 buttonsContainer.addEventListener('click', (e) => {
     if (e.target.tagName != 'BUTTON')
         return
@@ -40,7 +43,7 @@ buttonsContainer.addEventListener('click', (e) => {
             operate(add, lowerDisplay.innerHTML, ADD)
             break
         case '.':
-            // operate(point, lowerDisplay.innerHTML, POINT)
+            point(lowerDisplay.innerHTML)
             break
         case EQUALS:
             equals(lowerDisplay.innerHTML)
@@ -81,9 +84,13 @@ function toPowerOf(a, b) {
     return result 
 }
 
-//TODO : add point functionality
 function point(a) {
-    return a + '.'
+    let isLowerDisplayEmptyOrZero = a == '' || a == '0' || a == null
+    let isAlreadyDelimitered = lowerDisplay.innerHTML.includes('.')
+    if (!isLowerDisplayEmptyOrZero && !isAlreadyDelimitered) {
+        console.log(`delimitering ${a}`)
+        lowerDisplay.innerHTML += '.'
+    }
 }
 
 function equals(value) {
@@ -95,9 +102,6 @@ function equals(value) {
     currentValue = null
     currentOperation = null
 }
-
-let currentOperation = null
-let currentValue = null
 
 //TODO : test this
 function operate(operator, value, char) {
@@ -130,30 +134,6 @@ function operate(operator, value, char) {
             return
         }
     }
-}
-
-function op(operator, value, char) {
-    upperDisplay.innerHTML += lowerDisplay.innerHTML + ` ${char} `
-    activeDisplay.innerHTML = ''
-
-    if (prevVal) {
-        if (operator == prevOper) {
-            console.log(`prevVal: ${prevVal}`)
-            let result = operator(value, prevVal)
-            lowerDisplay.innerHTML = result
-            prevVal = result
-        } else {
-            console.log(`prevVal: ${prevVal}`)
-            let result = prevOper(prevVal, value)
-            upperDisplay.innerHTML = result + ` ${char} `
-
-            prevVal = result
-        }
-    } else {
-        prevVal = value
-    }
-    prevOper = operator
-    // b = b.split(' ').at(-1)
 }
 
 function addNumber(n) {
