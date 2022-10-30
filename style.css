@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   background-color: black;
-  color: white;
+  color: #EBF5EE;
 }
 
 body {
@@ -19,18 +19,21 @@ body {
 }
 .calculator .display {
   height: 5vh;
-  border: 1px solid white;
+  border: 2px solid #D8BFAA;
   text-align: right;
   display: flex;
   flex-direction: column;
 }
 .calculator .display .upper-part {
   height: 2vh;
+  padding-top: 0.4vh;
   font-size: 14px;
 }
 .calculator .display .lower-part {
   height: 3vh;
-  font-size: 16px;
+  padding-right: 0.3vw;
+  padding-top: 0.4vh;
+  font-size: 18px;
 }
 .calculator .buttons {
   display: flex;
@@ -45,4 +48,15 @@ body {
 button {
   height: 4vh;
   width: 4vw;
+  border: 1px solid #D8BFAA;
+}
+
+button:hover {
+  border: 1.5px solid #542344;
+  transition: 0.2s;
+}
+
+button:active {
+  border: 5px solid #542344;
+  transition: 0.2s;
 }/*# sourceMappingURL=style.css.map */
