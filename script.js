@@ -6,6 +6,8 @@ const ADD = '+'
 const SUBTRACT = '-'
 const EQUALS = '='
 const POINT = '.'
+const POWER = 'x<sup>y</sup>'
+const POWER_CHAR = '^'
 
 const upperDisplay = document.querySelector('.upper-part')
 const lowerDisplay = document.querySelector('.lower-part')
@@ -21,35 +23,36 @@ buttonsContainer.addEventListener('click', (e) => {
     if (e.target.tagName != 'BUTTON')
         return
 
-    let element = e.target
-    console.log(element.innerHTML)
-    switch(element.innerHTML) {
+    let lowerDisplayValue = lowerDisplay.innerHTML
+    let elementValue = e.target.innerHTML
+    console.log(elementValue)
+    switch(elementValue) {
         case C:
-            lowerDisplay.innerHTML = lowerDisplay.innerHTML.slice(0, -1)
+            lowerDisplay.innerHTML = lowerDisplayValue.slice(0, -1)
             break
         case AC:
             reset()
             break
         case MULTIPLY:
-            operate(multiply, lowerDisplay.innerHTML, MULTIPLY)
+            operate(multiply, lowerDisplayValue, MULTIPLY)
             break
         case DIVIDE:
-            operate(divide, lowerDisplay.innerHTML, DIVIDE)
+            operate(divide, lowerDisplayValue, DIVIDE)
             break
         case SUBTRACT:
-            operate(subtract, lowerDisplay.innerHTML, SUBTRACT)
+            operate(subtract, lowerDisplayValue, SUBTRACT)
             break
         case ADD:
-            operate(add, lowerDisplay.innerHTML, ADD)
+            operate(add, lowerDisplayValue, ADD)
             break
-        case '.':
-            point(lowerDisplay.innerHTML)
+        case POINT:
+            point(lowerDisplayValue)
             break
         case EQUALS:
-            equals(lowerDisplay.innerHTML)
+            equals(lowerDisplayValue)
             break
-        case 'x<sup>y</sup>':
-            operate(toPowerOf, lowerDisplay.innerHTML, '^')
+        case POWER:
+            operate(toPowerOf, lowerDisplayValue, POWER_CHAR)
             break
         default:
             addNumber(element.innerHTML)
@@ -103,7 +106,6 @@ function equals(value) {
     currentOperation = null
 }
 
-//TODO : test this
 function operate(operator, value, char) {
     let isUpperDisplayEmpty = upperDisplay.innerHTML == '' || upperDisplay.innerHTML == null
     let isLowerDisplayEmptyOrZero = value == '' || value == '0' || value == null
