@@ -55,7 +55,7 @@ buttonsContainer.addEventListener('click', (e) => {
             operate(toPowerOf, lowerDisplayValue, POWER_CHAR)
             break
         default:
-            addNumber(element.innerHTML)
+            addNumber(elementValue)
     }
 })
 
