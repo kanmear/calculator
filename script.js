@@ -126,15 +126,11 @@ function operate(operator, value, char) {
         currentOperation = operator
     } else if (!isUpperDisplayEmpty && !isLowerDisplayEmptyOrZero) {
         console.log('both are filled')
-        if (operator != currentOperation) {
-            let previousOperationResult = currentOperation(currentValue, value)
-            upperDisplay.innerHTML = `${previousOperationResult} ${char} `
-            lowerDisplay.innerHTML = ''
-            currentOperation = operator
-            currentValue = previousOperationResult
-        } else {
-            return
-        }
+        let previousOperationResult = currentOperation(currentValue, value)
+        upperDisplay.innerHTML = `${previousOperationResult} ${char} `
+        lowerDisplay.innerHTML = ''
+        currentOperation = operator
+        currentValue = previousOperationResult
     }
 }
 
